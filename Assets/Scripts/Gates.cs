@@ -13,11 +13,11 @@ public class Gates : MonoBehaviour
     public int amount;
 
     [Space(10)] [Header("Companents")]
-    public PlayerMechanics playerMechanic;
+    public GameManager gm;
     public GunManager gunManager;
     public TextMeshPro tmp;
-    public GameObject playerClonePrefab;
-
+    public GameObject[] playerClonePrefab;
+    
 
 
     private void OnTriggerEnter(Collider other)
@@ -29,19 +29,21 @@ public class Gates : MonoBehaviour
                 case BonusTypes.AddPlayer:
                     for (int i = 0; i < amount; i++)
                     {
-                        if (playerMechanic.playerCloneCount == 0)
+                        if (gm.playerCloneCount == 0)
                         {
-                            Instantiate(playerClonePrefab, playerMechanic.playerSpawn[0]);
+                            playerClonePrefab[0].SetActive(true);
                         }
                         else
                         {
-                            Instantiate(playerClonePrefab, playerMechanic.playerSpawn[1]);
+                            playerClonePrefab[1].SetActive(true);
                         }
+
+                        gm.playerCloneCount++;
                     }
                     break;
                 
                 case BonusTypes.UpgradePlayerLevel:
-                    
+                    gm.level++;
                     break;
                 
                 case BonusTypes.DamageBonus:

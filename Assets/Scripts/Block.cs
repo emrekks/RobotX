@@ -13,7 +13,8 @@ public class Block : MonoBehaviour, IDamagable
     public TextMeshPro tmp;
     public Transform weaponPointRef;
     public GameObject[] guns;
-    public GunManager GunManager;
+    public GunManager[] GunManager;
+    public GameManager gm;
 
     [Space(10)] [Header("Gun Type Settings")] //0 = Ak47// 1 = Pistol// 2 = Rpc 
     public bool ak47;
@@ -53,20 +54,24 @@ public class Block : MonoBehaviour, IDamagable
         {
             Health = 0;
 
-            if (ak47)
+            for (int i = 0; i < gm.playerCloneCount + 1; i++)
             {
-                GunManager.ChangeWeapon(0);
+                if (ak47)
+                {
+                    GunManager[i].ChangeWeapon(0);
+                }
+
+                else if (pistol)
+                {
+                    GunManager[i].ChangeWeapon(1);
+                }
+        
+                else if (rpg)
+                {
+                    GunManager[i].ChangeWeapon(2);
+                }
             }
 
-            else if (pistol)
-            {
-                GunManager.ChangeWeapon(1);
-            }
-        
-            else if (rpg)
-            {
-                GunManager.ChangeWeapon(2);
-            }
             gameObject.SetActive(false);
         }
         
