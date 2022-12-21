@@ -1,18 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private GunData gunData;
+    public GunData gunData;
+
+    public int damage;
+
+    public int fireRate;
     
     private float _timeSinceLastShoot;
 
     public Transform firePoint;
     
     private Projectile _projectile;
-    
-    private bool CanShoot() => _timeSinceLastShoot > 1f / (gunData.fireRate / 60);
+
+
+    private void Start()
+    {
+        damage = gunData.damage;
+
+        fireRate = gunData.fireRate;
+    }
+
+    private bool CanShoot() => _timeSinceLastShoot > 1f / (fireRate / 60);
     
     
     public void Shoot()
@@ -23,7 +36,7 @@ public class Gun : MonoBehaviour
             
             _projectile.transform.position = firePoint.position;
 
-            _projectile.damage = gunData.damage;
+            _projectile.damage = damage;
             
             _projectile.gameObject.SetActive(true);
             
