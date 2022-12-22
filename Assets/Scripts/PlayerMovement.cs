@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        Vector3 move = new Vector3(-horizontal, 0, -1);
+        Vector3 move = new Vector3(horizontal, 0, 1);
         rb.velocity = move * speed;
     }
 }

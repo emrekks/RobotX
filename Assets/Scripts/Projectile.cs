@@ -6,6 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Rigidbody rb;
+    private GameObject targetPos;
     
     [SerializeField] private float speed = 2;
 
@@ -13,7 +14,8 @@ public class Projectile : MonoBehaviour
     
     private void OnEnable()
     {
-        rb.AddForce(Vector3.back * speed, ForceMode.VelocityChange);
+        targetPos = GameObject.FindGameObjectWithTag("FireRefPos");
+        rb.AddForce((targetPos.transform.position - transform.position) * speed, ForceMode.VelocityChange);
         StartCoroutine(DisableProjectile());
     }
 

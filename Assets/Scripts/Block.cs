@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
+using DG.Tweening;
 using UnityEngine;
 
 public class Block : MonoBehaviour, IDamagable
@@ -15,11 +12,13 @@ public class Block : MonoBehaviour, IDamagable
     public GameObject[] guns;
     public GunManager[] GunManager;
     public GameManager gm;
+    public Transform hand;
+    public Enemy enemy;
 
     [Space(10)] [Header("Gun Type Settings")] //0 = Ak47// 1 = Pistol// 2 = Rpc 
     public bool ak47;
     public bool pistol;
-    public bool rpg;
+    public bool sniper;
 
     private void Start()
     {
@@ -29,19 +28,19 @@ public class Block : MonoBehaviour, IDamagable
         
         if (ak47)
         {
-            Instantiate(guns[0], weaponPointRef);
+            Instantiate(guns[0], hand);
             guns[0].gameObject.SetActive(true);
         }
 
         else if (pistol)
         {
-            Instantiate(guns[1], weaponPointRef);
+            Instantiate(guns[1], hand);
             guns[1].gameObject.SetActive(true);
         }
         
-        else if (rpg)
+        else if (sniper)
         {
-            Instantiate(guns[2], weaponPointRef);
+            Instantiate(guns[2], hand);
             guns[2].gameObject.SetActive(true);
         }
     }
@@ -49,6 +48,10 @@ public class Block : MonoBehaviour, IDamagable
     public void Damage(int amount)
     {
         Health -= amount;
+        
+        transform.DORewind();
+        transform.DOPunchScale(new Vector3(0.3f,0.15f,0.3f), 0.5f);
+
         
         if (Health <= 0)
         {
@@ -66,7 +69,7 @@ public class Block : MonoBehaviour, IDamagable
                     GunManager[i].ChangeWeapon(1);
                 }
         
-                else if (rpg)
+                else if (sniper)
                 {
                     GunManager[i].ChangeWeapon(2);
                 }

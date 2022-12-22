@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = System.Object;
 
 public class Gun : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class Gun : MonoBehaviour
     public Transform firePoint;
     
     private Projectile _projectile;
+
+    public GameObject bulletDrop;
+    
+    public Transform bulletDropPos;
 
 
     private void Start()
@@ -32,6 +37,12 @@ public class Gun : MonoBehaviour
     {
         if (CanShoot())
         {
+            var muzzle = ObjectPooling.instance.GetMuzzleFromPool();
+
+            muzzle.transform.position = firePoint.position;
+
+            muzzle.SetActive(true);
+
             _projectile = ObjectPooling.instance.GetProjectileFromPool();
             
             _projectile.transform.position = firePoint.position;
@@ -41,10 +52,11 @@ public class Gun : MonoBehaviour
             _projectile.gameObject.SetActive(true);
             
             _timeSinceLastShoot = 0;
+
+            Instantiate(bulletDrop, bulletDropPos);
         }
     }
 
-    
     void Update()
     {
         _timeSinceLastShoot += Time.deltaTime;

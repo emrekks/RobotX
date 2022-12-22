@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Gates : MonoBehaviour
@@ -33,25 +34,20 @@ public class Gates : MonoBehaviour
                         {
                             playerClonePrefab[0].SetActive(true);
                         }
-                        else
+                        else if (gm.playerCloneCount != 0)
                         {
                             playerClonePrefab[1].SetActive(true);
                         }
-
                         gm.playerCloneCount++;
                     }
                     break;
-                
-                case BonusTypes.UpgradePlayerLevel:
-                    gm.level++;
-                    break;
-                
+
                 case BonusTypes.DamageBonus:
-                    gunManager.currentWeapon.GetComponent<Gun>().damage += 20;
+                    gunManager.currentWeapon.GetComponent<Gun>().damage += amount;
                     break;
                 
                 case BonusTypes.FireRateBonus:
-                    gunManager.currentWeapon.GetComponent<Gun>().fireRate += 200;
+                    gunManager.currentWeapon.GetComponent<Gun>().fireRate += amount;
                     break;
             }
         }
@@ -61,7 +57,6 @@ public class Gates : MonoBehaviour
 public enum BonusTypes
 {
     AddPlayer,
-    UpgradePlayerLevel,
     DamageBonus,
     FireRateBonus
 }
