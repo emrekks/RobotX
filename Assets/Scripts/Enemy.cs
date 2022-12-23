@@ -2,18 +2,48 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
     public Transform player;
-    public Quaternion turretQuaternion;
     public Transform turretMovingPart;
     public float enemyPerceiveDistance;
     private float _distanceBetweenToObject;
+    private bool doOnce;
+    private float random;
 
-    private void Start()
+    public Transform firePoint;
+    private TurretAmmo _turretAmmo;
+    private float _timeSinceLastShoot;
+    public int fireRate; 
+    public int damage; 
+    
+    private bool CanShoot() => _timeSinceLastShoot > 1f / (fireRate / 60);
+    
+    
+    public void Shoot()
     {
-        turretQuaternion = turretMovingPart.localRotation;
+        if (CanShoot())
+        {
+            var muzzle = ObjectPooling.instance.GetMuzzleFromPool();
+
+            muzzle.transform.position = firePoint.position;
+
+            muzzle.SetActive(true);
+
+            _turretAmmo = ObjectPooling.instance.GetTurretAmmoFromPool();
+            
+            _turretAmmo.transform.position = firePoint.position;
+
+            _turretAmmo.damage = damage;
+            
+            _turretAmmo.gameObject.SetActive(true);
+            
+            _timeSinceLastShoot = 0;
+
+            doOnce = false;
+        }
     }
 
     void Update()
@@ -22,10 +52,15 @@ public class Enemy : MonoBehaviour
 
         if (_distanceBetweenToObject <= enemyPerceiveDistance)
         {
-            var v3T = player.transform.position - transform.position;
-            v3T.y = turretMovingPart.position.y + 50;
-            turretQuaternion = Quaternion.LookRotation(v3T, Vector3.up);        
-            turretMovingPart.rotation = Quaternion.RotateTowards(turretMovingPart.rotation, turretQuaternion, 30 * Time.deltaTime);
+            if (!doOnce)
+            {
+                random = Random.Range(-10.0f, 10.0f);
+                doOnce = true;
+            }
+            turretMovingPart.LookAt(player);
+            turretMovingPart.transform.Rotate(-90,0,random);
+            _timeSinceLastShoot += Time.deltaTime;
+            Shoot();
         }
     }
 }

@@ -7,13 +7,13 @@ public class Projectile : MonoBehaviour
 {
     public Rigidbody rb;
     private GameObject targetPos;
-    
+    public TrailRenderer trailRenderer;
     [SerializeField] private float speed = 2;
-
-    public int damage;
+    [HideInInspector]public int damage;
     
     private void OnEnable()
     {
+        trailRenderer.Clear();
         targetPos = GameObject.FindGameObjectWithTag("FireRefPos");
         rb.AddForce((targetPos.transform.position - transform.position) * speed, ForceMode.VelocityChange);
         StartCoroutine(DisableProjectile());
@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
 
     IEnumerator DisableProjectile()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.75f);
         ObjectPooling.instance.GetProjectileBackToPool(this);
     }
 

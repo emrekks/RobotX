@@ -15,9 +15,15 @@ public class Gates : MonoBehaviour
 
     [Space(10)] [Header("Companents")]
     public GameManager gm;
-    public GunManager gunManager;
+    public GunManager[] gunManager;
     public TextMeshPro tmp;
     public GameObject[] playerClonePrefab;
+
+
+    [Space(10)] [Header("Gun Type Settings")] //0 = Archtronic// 1 = Mauler// 2 = Hellwailer 
+    public bool archtronic;
+    public bool mauler;
+    public bool hellwailer;
     
 
 
@@ -28,28 +34,80 @@ public class Gates : MonoBehaviour
             switch (bonusTypes)
             {
                 case BonusTypes.AddPlayer:
-                    for (int i = 0; i < amount; i++)
-                    {
-                        if (gm.playerCloneCount == 0)
-                        {
-                            playerClonePrefab[0].SetActive(true);
-                        }
-                        else if (gm.playerCloneCount != 0)
-                        {
-                            playerClonePrefab[1].SetActive(true);
-                        }
-                        gm.playerCloneCount++;
-                    }
+                    AddPlayer();
                     break;
 
                 case BonusTypes.DamageBonus:
-                    gunManager.currentWeapon.GetComponent<Gun>().damage += amount;
+                    DamageBonusAdd();
+                    break;
+                
+                case BonusTypes.ChangeWeapon:
+                    ChangeWeapon();
                     break;
                 
                 case BonusTypes.FireRateBonus:
-                    gunManager.currentWeapon.GetComponent<Gun>().fireRate += amount;
+                    FireRateBonusAdd();
                     break;
             }
+        }
+    }
+
+    private void DamageBonusAdd()
+    {
+        for (int i = 0; i < gm.playerCloneCount + 1; i++)
+        {
+            if (gunManager[i].isActiveAndEnabled)
+            {
+                gunManager[i].currentWeapon.GetComponent<Gun>().damage += amount;
+            }
+        }
+    }
+
+    private void FireRateBonusAdd()
+    {
+        for (int i = 0; i < gm.playerCloneCount + 1; i++)
+        {
+            if (gunManager[i].isActiveAndEnabled)
+            {
+                gunManager[i].currentWeapon.GetComponent<Gun>().fireRate += amount;
+            }
+        }
+    }
+
+    private void ChangeWeapon()
+    {
+        for (int i = 0; i < gm.playerCloneCount + 1; i++)
+        {
+            if (archtronic)
+            {
+                gunManager[i].ChangeWeapon(0);
+            }
+
+            else if (mauler)
+            {
+                gunManager[i].ChangeWeapon(1);
+            }
+        
+            else if (hellwailer)
+            {
+                gunManager[i].ChangeWeapon(2);
+            }
+        }
+    }
+
+    private void AddPlayer()
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            if (gm.playerCloneCount == 0)
+            {
+                playerClonePrefab[0].SetActive(true);
+            }
+            else if (gm.playerCloneCount != 0)
+            {
+                playerClonePrefab[1].SetActive(true);
+            }
+            gm.playerCloneCount++;
         }
     }
 }
@@ -57,6 +115,7 @@ public class Gates : MonoBehaviour
 public enum BonusTypes
 {
     AddPlayer,
+    ChangeWeapon,
     DamageBonus,
     FireRateBonus
 }

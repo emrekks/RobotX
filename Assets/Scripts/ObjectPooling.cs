@@ -13,6 +13,11 @@ public class ObjectPooling : MonoBehaviour
     public GameObject muzzleFlashToPool;
     public int amountMuzzleToPool;
     public Transform muzzlePos;
+    //TurretAmmo
+    public List<TurretAmmo> turretAmmo = new List<TurretAmmo>();
+    public TurretAmmo turretAmmoToPool;
+    public int amountTurretAmmoToPool;
+    public Transform fireTrans;
 
     #region Singleton
     
@@ -39,6 +44,13 @@ public class ObjectPooling : MonoBehaviour
             GameObject obj = Instantiate(muzzleFlashToPool, muzzlePos);
             obj.gameObject.SetActive(false); 
             muzzleFlashObjects.Add(obj);
+        }
+        
+        for (int i = 0; i < amountTurretAmmoToPool; i++) 
+        {
+            TurretAmmo obj = Instantiate(turretAmmoToPool, fireTrans);
+            obj.gameObject.SetActive(false); 
+            turretAmmo.Add(obj);
         }
     }
 
@@ -80,5 +92,26 @@ public class ObjectPooling : MonoBehaviour
     public void GetMuzzleBackToPool(GameObject muzzleFlash)
     {
         muzzleFlash.gameObject.SetActive(false);
+    }
+    
+    //TurretAmmo
+    
+    public TurretAmmo GetTurretAmmoFromPool()
+    {
+        for (int i = 0; i < turretAmmo.Count; i++) 
+        {
+            if (!turretAmmo[i].gameObject.activeSelf)
+            {
+                return turretAmmo[i];
+            }
+        }
+        
+        return null;
+    }
+
+    public void GetTurretAmmoBackToPool(TurretAmmo turretAmmo)
+    {
+        turretAmmo.rb.velocity = Vector3.zero;
+        turretAmmo.gameObject.SetActive(false);
     }
 }
