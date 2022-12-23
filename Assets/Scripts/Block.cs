@@ -15,10 +15,10 @@ public class Block : MonoBehaviour, IDamagable
     public Transform hand;
     public Enemy enemy;
 
-    [Space(10)] [Header("Gun Type Settings")] //0 = Ak47// 1 = Pistol// 2 = Rpc 
-    public bool ak47;
-    public bool pistol;
-    public bool sniper;
+    [Space(10)] [Header("Gun Type Settings")] //0 = Archtronic// 1 = Mauler// 2 = Hellwailer 
+    public bool archtronic;
+    public bool mauler;
+    public bool hellwailer;
 
     private void Start()
     {
@@ -26,19 +26,19 @@ public class Block : MonoBehaviour, IDamagable
         
         tmp.text = Health.ToString();
         
-        if (ak47)
+        if (archtronic)
         {
             Instantiate(guns[0], hand);
             guns[0].gameObject.SetActive(true);
         }
 
-        else if (pistol)
+        else if (mauler)
         {
             Instantiate(guns[1], hand);
             guns[1].gameObject.SetActive(true);
         }
         
-        else if (sniper)
+        else if (hellwailer)
         {
             Instantiate(guns[2], hand);
             guns[2].gameObject.SetActive(true);
@@ -59,17 +59,17 @@ public class Block : MonoBehaviour, IDamagable
 
             for (int i = 0; i < gm.playerCloneCount + 1; i++)
             {
-                if (ak47)
+                if (archtronic)
                 {
                     GunManager[i].ChangeWeapon(0);
                 }
 
-                else if (pistol)
+                else if (mauler)
                 {
                     GunManager[i].ChangeWeapon(1);
                 }
         
-                else if (sniper)
+                else if (hellwailer)
                 {
                     GunManager[i].ChangeWeapon(2);
                 }

@@ -18,6 +18,10 @@ public class Gun : MonoBehaviour
     
     private Projectile _projectile;
 
+    [Space(10)] [Header("Bullet Drop To Ground Settings")]
+    
+    public bool bulletDropActive;
+
     public GameObject bulletDrop;
     
     public Transform bulletDropPos;
@@ -53,7 +57,10 @@ public class Gun : MonoBehaviour
             
             _timeSinceLastShoot = 0;
 
-            Instantiate(bulletDrop, bulletDropPos);
+            if (bulletDropActive)
+            {
+                Instantiate(bulletDrop, bulletDropPos);
+            }
         }
     }
 
