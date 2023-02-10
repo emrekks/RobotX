@@ -21,7 +21,7 @@ public class GunManager : MonoBehaviour
       {
          currentWeapon.SetActive(false);
          currentWeapon = weapons[i];
-         weapons[i].SetActive(true);
+         currentWeapon.SetActive(true);
          var currentWeaponData = currentWeapon.GetComponent<Gun>();
          currentWeaponData.damage = currentWeaponData.gunData.damage;
          currentWeaponData.fireRate = currentWeaponData.gunData.fireRate;

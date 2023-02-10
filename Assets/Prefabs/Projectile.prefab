@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7755163944150239306}
+  targetPos: {fileID: 0}
   trailRenderer: {fileID: -2160344099791848691}
   speed: 1.5
   damage: 0

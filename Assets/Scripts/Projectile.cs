@@ -6,7 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Rigidbody rb;
-    private GameObject targetPos;
+    public GameObject targetPos;
     public TrailRenderer trailRenderer;
     [SerializeField] private float speed = 2;
     [HideInInspector]public int damage;
@@ -27,14 +27,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Block"))
+        if(other.TryGetComponent(out IDamagable hit))
         {
             ObjectPooling.instance.GetProjectileBackToPool(this);
-            
-            if(other.TryGetComponent(out IDamagable hit))
-            {
-                hit.Damage(damage);
-            }
+
+            hit.Damage(damage);
         }
     }
 }

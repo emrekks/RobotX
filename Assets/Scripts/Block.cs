@@ -5,17 +5,13 @@ using UnityEngine;
 public class Block : MonoBehaviour, IDamagable
 { 
     public int Health { get; set; }
-
+    public int blockHealth = 100;
     [Header("Companent")] 
     public TextMeshPro tmp;
-    public GameManager gm;
-    public Transform hand;
-    public Enemy enemy;
-    
 
     private void Start()
     {
-        Health = 100;
+        Health = blockHealth;
         
         tmp.text = Health.ToString();
     }
@@ -32,7 +28,10 @@ public class Block : MonoBehaviour, IDamagable
         {
             Health = 0;
 
-            gameObject.SetActive(false);
+            transform.DOScale(Vector3.zero, 0.35f).OnComplete(() =>
+            {
+                gameObject.SetActive(false);
+            });
         }
         
         tmp.text = Health.ToString();

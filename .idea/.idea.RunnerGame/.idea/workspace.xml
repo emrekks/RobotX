@@ -8,7 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5ddb5fa70dfe40d2818192400111b9ec2aa00/60/ecd43e28/ShortcutExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Obstacle.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -24,13 +24,27 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;rider.run.widget.enabled.cache&quot;: &quot;false&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\emrek\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\emrek\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\emrek\\AppData\\Local\\Symbols\\src&quot;
+    ]
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="E:\Unity 2021.3.7f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\emrek\OneDrive\Masaüstü\RunnerGame -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\emrek\OneDrive\Masaüstü\RunnerGame" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="E:\2021.3.11f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="E:\Unity 2021.3.7f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Users\Didem Doğrul\OneDrive\Masaüstü\RunnerGame&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Didem Doğrul\OneDrive\Masaüstü\RunnerGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -74,6 +88,28 @@
       <workItem from="1671738394308" duration="14504000" />
       <workItem from="1671781125909" duration="4191000" />
       <workItem from="1671801789099" duration="2371000" />
+      <workItem from="1672167099679" duration="278000" />
+      <workItem from="1672167486618" duration="301000" />
+      <workItem from="1673521615132" duration="2585000" />
+      <workItem from="1674132840922" duration="5045000" />
+      <workItem from="1674139140563" duration="896000" />
+      <workItem from="1674154696568" duration="3047000" />
+      <workItem from="1674812318973" duration="4995000" />
+      <workItem from="1674820681723" duration="2013000" />
+      <workItem from="1675075081454" duration="9364000" />
+      <workItem from="1675157761113" duration="6605000" />
+      <workItem from="1675237906422" duration="259000" />
+      <workItem from="1675238188223" duration="6616000" />
+      <workItem from="1675265026792" duration="1413000" />
+      <workItem from="1675274080415" duration="630000" />
+      <workItem from="1675339333779" duration="5326000" />
+      <workItem from="1675423376985" duration="5099000" />
+      <workItem from="1675904944434" duration="389000" />
+      <workItem from="1675960635476" duration="2467000" />
+      <workItem from="1675972360647" duration="64000" />
+      <workItem from="1675982141668" duration="2580000" />
+      <workItem from="1675986177554" duration="1000" />
+      <workItem from="1675989376748" duration="1805000" />
     </task>
     <servers />
   </component>

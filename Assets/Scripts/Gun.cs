@@ -26,15 +26,24 @@ public class Gun : MonoBehaviour
     
     public Transform bulletDropPos;
 
+    public bool canFirePlayer;
+
+    private EnemyBoss enemy;
+ 
+
 
     private void Start()
     {
         damage = gunData.damage;
 
         fireRate = gunData.fireRate;
+
+        canFirePlayer = true;
+        
+        enemy = FindObjectOfType<EnemyBoss>();
     }
 
-    private bool CanShoot() => _timeSinceLastShoot > 1f / (fireRate / 60);
+    private bool CanShoot() => _timeSinceLastShoot > 1f / (fireRate / 60) && canFirePlayer;
     
     
     public void Shoot()
@@ -62,6 +71,20 @@ public class Gun : MonoBehaviour
                 Instantiate(bulletDrop, bulletDropPos);
             }
         }
+    }
+
+    public void KillBoss()
+    {
+        _projectile.targetPos.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 2, enemy.transform.position.z);
+        StartCoroutine(WaitForFunction());
+    }
+    
+    IEnumerator WaitForFunction()
+    { 
+        yield return new WaitForSeconds(1f);
+        canFirePlayer = true;
+        yield return new WaitForSeconds(2f);
+        canFirePlayer = false;
     }
 
     void Update()

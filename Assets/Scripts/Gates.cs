@@ -15,7 +15,6 @@ public class Gates : MonoBehaviour
 
     [Space(10)] [Header("Companents")]
     public GameManager gm;
-    public GunManager[] gunManager;
     public TextMeshPro tmp;
     public GameObject[] playerClonePrefab;
 
@@ -54,43 +53,37 @@ public class Gates : MonoBehaviour
 
     private void DamageBonusAdd()
     {
-        for (int i = 0; i < gm.playerCloneCount + 1; i++)
+        foreach (var player in gm.players)
         {
-            if (gunManager[i].isActiveAndEnabled)
-            {
-                gunManager[i].currentWeapon.GetComponent<Gun>().damage += amount;
-            }
+            player.GetComponent<GunManager>().currentWeapon.GetComponent<Gun>().damage += amount;
         }
     }
 
     private void FireRateBonusAdd()
     {
-        for (int i = 0; i < gm.playerCloneCount + 1; i++)
+        foreach (var player in gm.players)
         {
-            if (gunManager[i].isActiveAndEnabled)
-            {
-                gunManager[i].currentWeapon.GetComponent<Gun>().fireRate += amount;
-            }
+            player.GetComponent<GunManager>().currentWeapon.GetComponent<Gun>().fireRate += amount;
         }
     }
 
     private void ChangeWeapon()
     {
-        for (int i = 0; i < gm.playerCloneCount + 1; i++)
+        foreach (var player in gm.players)
         {
             if (archtronic)
             {
-                gunManager[i].ChangeWeapon(0);
+                player.GetComponent<GunManager>().ChangeWeapon(0);
             }
-
+           
             else if (mauler)
             {
-                gunManager[i].ChangeWeapon(1);
+                player.GetComponent<GunManager>().ChangeWeapon(1);
             }
         
             else if (hellwailer)
             {
-                gunManager[i].ChangeWeapon(2);
+                player.GetComponent<GunManager>().ChangeWeapon(2);
             }
         }
     }
@@ -103,7 +96,7 @@ public class Gates : MonoBehaviour
             {
                 playerClonePrefab[0].SetActive(true);
             }
-            else if (gm.playerCloneCount != 0)
+            else if (gm.playerCloneCount == 1)
             {
                 playerClonePrefab[1].SetActive(true);
             }

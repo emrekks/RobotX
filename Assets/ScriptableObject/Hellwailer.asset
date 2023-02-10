@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f8eaef761d33142a26b82ccc9231ef, type: 3}
   m_Name: Hellwailer
   m_EditorClassIdentifier: 
-  fireRate: 100
-  damage: 20
+  fireRate: 250
+  damage: 10

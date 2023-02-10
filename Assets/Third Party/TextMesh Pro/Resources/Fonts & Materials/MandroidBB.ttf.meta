@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 6bb7f45a91068b34983e09d0b9822d75
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Mandroid BB
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 3392975b06b71084289d6f4a2573ddf2, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

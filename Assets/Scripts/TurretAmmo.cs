@@ -6,14 +6,13 @@ public class TurretAmmo : MonoBehaviour
 {
     public Rigidbody rb;
     public TrailRenderer trailRenderer;
-
     [SerializeField] private float speed = 2;
     [HideInInspector]public int damage;
 
     private void OnEnable()
     {
         trailRenderer.Clear();
-        rb.AddForce(transform.right * speed, ForceMode.VelocityChange);
+        rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
         StartCoroutine(DisableTurretAmmo());
     }
 
@@ -25,7 +24,7 @@ public class TurretAmmo : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.layer == 3)
         {
             ObjectPooling.instance.GetTurretAmmoBackToPool(this);
             
