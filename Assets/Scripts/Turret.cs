@@ -2,26 +2,42 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Turret : MonoBehaviour
 {
-    public Transform[] playerTransforms;
-    public Transform closestPlayer;
+    [Header("Companent")]
+    public Transform[] playersTransforms;
+   
+    [HideInInspector]public Transform closestPlayer;
+   
     public Transform turretMovingPart;
-    public float enemyPerceiveDistance;
-    private float _distanceBetweenToObject;
-    private float minDistance = Mathf.Infinity;
-
+   
     public Transform firePoint;
+   
     private TurretAmmo _turretAmmo;
-    private float _timeSinceLastShoot;
+    
+    [Header("Values")]
+    
+    [Tooltip("Detection distance for the player.")]
+    public float enemyPerceiveDistance;
+    
     public int fireRate; 
+  
     public int damage;
+   
+    private float _distanceBetweenToObject;
+   
+    private float minDistance = Mathf.Infinity;
+    
+    private float _timeSinceLastShoot;
+   
     private int random;
     
     private bool CanShoot() => _timeSinceLastShoot > 1f / (fireRate / 60);
 
+    
     public void Shoot()
     {
         if (CanShoot())
@@ -54,7 +70,7 @@ public class Turret : MonoBehaviour
 
         if (_distanceBetweenToObject <= enemyPerceiveDistance)
         {
-            foreach (var playerTransform in playerTransforms)
+            foreach (var playerTransform in playersTransforms)
             {
                 if (playerTransform.gameObject.activeInHierarchy)
                 {

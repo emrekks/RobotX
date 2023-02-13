@@ -1,22 +1,27 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Object = System.Object;
 
 public class Gun : MonoBehaviour
 {
-    public GunData gunData;
+    [Header("Companent")]
+    
+    public Transform firePoint;
 
+    public GunData gunData;
+    
+    private Projectile _projectile;
+    
+    private EnemyBoss _enemy;
+    
+    [Space(10)] [Header("Values")]
+    
     public int damage;
 
     public int fireRate;
     
-    private float _timeSinceLastShoot;
-
-    public Transform firePoint;
+    public bool canFirePlayer;
     
-    private Projectile _projectile;
+    private float _timeSinceLastShoot;
 
     [Space(10)] [Header("Bullet Drop To Ground Settings")]
     
@@ -25,11 +30,6 @@ public class Gun : MonoBehaviour
     public GameObject bulletDrop;
     
     public Transform bulletDropPos;
-
-    public bool canFirePlayer;
-
-    private EnemyBoss enemy;
- 
 
 
     private void Start()
@@ -40,7 +40,7 @@ public class Gun : MonoBehaviour
 
         canFirePlayer = true;
         
-        enemy = FindObjectOfType<EnemyBoss>();
+        _enemy = FindObjectOfType<EnemyBoss>();
     }
 
     private bool CanShoot() => _timeSinceLastShoot > 1f / (fireRate / 60) && canFirePlayer;
@@ -73,9 +73,11 @@ public class Gun : MonoBehaviour
         }
     }
 
+    
+    //If the player's power is higher than 700 and they reach the finish line, this function will activate and the players will be trapped by the boss and start shooting at it.
     public void KillBoss()
     {
-        _projectile.targetPos.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 2, enemy.transform.position.z);
+        _projectile.targetPos.transform.position = new Vector3(_enemy.transform.position.x, _enemy.transform.position.y + 2, _enemy.transform.position.z);
         StartCoroutine(WaitForFunction());
     }
     

@@ -48,9 +48,16 @@ public class Gates : MonoBehaviour
                     FireRateBonusAdd();
                     break;
             }
+
+            StartCoroutine(AfterGateCheckPowerDelay());
         }
     }
 
+    private IEnumerator AfterGateCheckPowerDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        gm.CheckPlayerPower();
+    }
     private void DamageBonusAdd()
     {
         foreach (var player in gm.players)
@@ -95,15 +102,23 @@ public class Gates : MonoBehaviour
             if (gm.playerCloneCount == 0)
             {
                 playerClonePrefab[0].SetActive(true);
+                StartCoroutine(AddNewPlayerDamageBonusDelay(0));
             }
             else if (gm.playerCloneCount == 1)
             {
                 playerClonePrefab[1].SetActive(true);
+                StartCoroutine(AddNewPlayerDamageBonusDelay(1));
             }
             gm.playerCloneCount++;
         }
     }
+    public IEnumerator AddNewPlayerDamageBonusDelay(int i)
+    {
+        yield return new WaitForSeconds(0.05f);
+        playerClonePrefab[i].GetComponent<GunManager>().currentWeapon.GetComponent<Gun>().damage += 4;
+    }
 }
+
 
 public enum BonusTypes
 {

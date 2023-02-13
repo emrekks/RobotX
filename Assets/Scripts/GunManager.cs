@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class GunManager : MonoBehaviour
 {
+   [Header("Companent")]
    public GameObject currentWeapon;
-
-   public GameObject[] weapons; //0 = Ak47// 1 = Pistol// 2 = Rpc
+  
+   [Tooltip("0 = Archtronic// 1 = Mauler// 2 = Hellwailer")]
+   public GameObject[] weapons;
 
    private void Start()
    {

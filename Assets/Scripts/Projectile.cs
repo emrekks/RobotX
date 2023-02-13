@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [Header("Companent")]
+    
     public Rigidbody rb;
+    
+    [Tooltip("Reference of where the bullets will go.")]
     public GameObject targetPos;
+    
     public TrailRenderer trailRenderer;
+    
     [SerializeField] private float speed = 2;
+    
     [HideInInspector]public int damage;
+    
     
     private void OnEnable()
     {

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Archtronic
   m_EditorClassIdentifier: 
   fireRate: 100
-  damage: 30
+  damage: 50

@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class ObjectPooling : MonoBehaviour
 {
-    //Bullet
-    public List<Projectile> pooledObjects = new List<Projectile>();
+    [Header("Player Bullet")]
+    [HideInInspector]public List<Projectile> pooledObjects = new List<Projectile>();
     public Projectile objectToPool;
     public int amountToPool;
-    //MuzzleFlash
+   
+    [Header("Muzzle Flash")]
     public List<GameObject> muzzleFlashObjects = new List<GameObject>();
     public GameObject muzzleFlashToPool;
     public int amountMuzzleToPool;
     public Transform muzzlePos;
-    //TurretAmmo
+  
+    [Header("Turret Ammo")]
     public List<TurretAmmo> turretAmmo = new List<TurretAmmo>();
     public TurretAmmo turretAmmoToPool;
     public int amountTurretAmmoToPool;
@@ -30,6 +32,8 @@ public class ObjectPooling : MonoBehaviour
 
     #endregion
 
+    
+    //Spawns the pool objects.""Spawns the pool objects.
     void Start()
     {
         for (int i = 0; i < amountToPool; i++) 

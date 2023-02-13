@@ -6,11 +6,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
 {
-    public int Health { get; set; }
+    [Header("Companent")]
+    
+    [Tooltip("This text mesh for player health on player.")]
     public TextMeshPro tmp;
+  
+    [Tooltip("Assign player animator.")]
     public Animator anim;
+    
+    [Tooltip("Assign players' gun manager.")]
     public GunManager gunManager;
+    
+    public int Health { get; set; }
 
+    //When player setactive true, health text is setactive true
     private void OnEnable()
     {
         tmp.gameObject.SetActive(true);
@@ -31,7 +40,7 @@ public class Player : MonoBehaviour, IDamagable
         {
             Health = 0;
 
-            gameObject.SetActive(false);
+            anim.SetTrigger("Die");
         }
         
         tmp.text = Health.ToString();
@@ -42,6 +51,8 @@ public class Player : MonoBehaviour, IDamagable
         anim.SetBool("Idle", true);
     }
 
+    
+    // The boss's hand kills the player if it touches the player.
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("EnemyHandToAttack"))

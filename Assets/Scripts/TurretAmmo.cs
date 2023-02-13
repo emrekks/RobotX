@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class TurretAmmo : MonoBehaviour
 {
+    [Header("Companent")]
     public Rigidbody rb;
     public TrailRenderer trailRenderer;
+    
+    [Header("Values")]
     [SerializeField] private float speed = 2;
     [HideInInspector]public int damage;
 

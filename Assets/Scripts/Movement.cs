@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    //public GameManager gm;
+    [Header("Values")]
     [SerializeField] private float speed;
     [SerializeField] private float maxValue;
     [SerializeField] private float minValue;
-    public float forwardSpeed = 1;
-    public bool lockMovement = false;
-    public float horizontal;
+  
+    [HideInInspector]public float forwardSpeed = 1;
+    [HideInInspector]public bool lockMovement = false;
+    [HideInInspector]public float horizontal;
 
     private void Update()
     {
@@ -24,6 +27,7 @@ public class Movement : MonoBehaviour
         Vector3 move = new Vector3(horizontal, 0, forwardSpeed);
         
         transform.Translate(move * (speed * Time.deltaTime));
+
         
         //Clamp Character Movement to adding border to map
         Vector3 clampedPosition = transform.position;
